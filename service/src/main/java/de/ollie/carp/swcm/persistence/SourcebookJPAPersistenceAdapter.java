@@ -5,9 +5,9 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import de.ollie.carp.swcm.core.model.Sourcebook;
 import de.ollie.carp.swcm.persistence.converter.SourcebookDBOConverter;
 import de.ollie.carp.swcm.persistence.repository.SourcebookDBORepository;
+import de.ollie.carp.swcm.core.model.Sourcebook;
 
 /**
  * A DBO persistence adapter for sourcebooks.
