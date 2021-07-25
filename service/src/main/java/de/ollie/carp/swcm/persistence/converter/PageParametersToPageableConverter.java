@@ -1,5 +1,6 @@
 package de.ollie.carp.swcm.persistence.converter;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import de.ollie.carp.swcm.core.model.PageParameters;
@@ -12,7 +13,10 @@ import de.ollie.carp.swcm.core.model.PageParameters;
 public class PageParametersToPageableConverter {
 
 	public Pageable convert(PageParameters pageParameters) {
-		return null;
+		if (pageParameters == null) {
+			return null;
+		}
+		return PageRequest.of(pageParameters.getPageNumber(), pageParameters.getEntriesPerPage());
 	}
 
 }

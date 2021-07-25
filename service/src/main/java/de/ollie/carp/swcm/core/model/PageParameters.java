@@ -12,7 +12,7 @@ import lombok.Generated;
 @Generated
 public class PageParameters {
 
-	private long start;
+	private int pageNumber;
 	private int entriesPerPage;
 
 }
