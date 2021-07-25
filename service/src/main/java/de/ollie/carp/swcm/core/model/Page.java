@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
  *
  * @param <CONTENT> The type of the objects which are to return with the page.
  *
- *                  GENERATED CODE !!! DO NOT CHANGE !!!
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Accessors(chain = true)
 @Data
