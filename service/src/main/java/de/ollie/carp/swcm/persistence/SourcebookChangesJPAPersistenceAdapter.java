@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import de.ollie.carp.swcm.core.model.Page;
+import de.ollie.carp.swcm.core.model.PageParameters;
 import de.ollie.carp.swcm.persistence.converter.SourcebookChangesDBOConverter;
 import de.ollie.carp.swcm.persistence.repository.SourcebookChangesDBORepository;
 import de.ollie.carp.swcm.core.model.SourcebookChanges;
@@ -25,6 +27,10 @@ public class SourcebookChangesJPAPersistenceAdapter {
 	public SourcebookChanges create(SourcebookChanges model) {
 		model.setId(-1);
 		return converter.toModel(repository.save(converter.toDBO(model)));
+	}
+
+	public Page<SourcebookChanges> findAll(PageParameters pageParameters) {
+		return null;
 	}
 
 	public Optional<SourcebookChanges> findById(Long id) {

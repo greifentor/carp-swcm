@@ -5,6 +5,8 @@ import java.util.Optional;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import de.ollie.carp.swcm.core.model.Page;
+import de.ollie.carp.swcm.core.model.PageParameters;
 import de.ollie.carp.swcm.core.model.SourcebookChanges;
 import de.ollie.carp.swcm.core.service.port.persistence.SourcebookChangesPersistencePort;
 import de.ollie.carp.swcm.core.service.SourcebookChangesService;
@@ -25,6 +27,11 @@ public class SourcebookChangesServiceImpl implements SourcebookChangesService {
 	@Override
 	public SourcebookChanges create(SourcebookChanges model) {
 		return persistencePort.create(model);
+	}
+
+	@Override
+	public Page<SourcebookChanges> findAll(PageParameters pageParameters) {
+		return persistencePort.findAll(pageParameters);
 	}
 
 	@Override

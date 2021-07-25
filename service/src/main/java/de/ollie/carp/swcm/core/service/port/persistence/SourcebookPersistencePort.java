@@ -2,6 +2,8 @@ package de.ollie.carp.swcm.core.service.port.persistence;
 
 import java.util.Optional;
 
+import de.ollie.carp.swcm.core.model.Page;
+import de.ollie.carp.swcm.core.model.PageParameters;
 import de.ollie.carp.swcm.core.model.Sourcebook;
 import lombok.Generated;
 
@@ -14,6 +16,8 @@ import lombok.Generated;
 public interface SourcebookPersistencePort {
 
 	Sourcebook create(Sourcebook model);
+
+	Page<Sourcebook> findAll(PageParameters pageParameters);
 
 	Optional<Sourcebook> findById(Long id);
 

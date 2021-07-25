@@ -1,0 +1,18 @@
+package de.ollie.carp.swcm.core.model;
+
+import lombok.Data;
+import lombok.Generated;
+
+/**
+ * A page parameters to limit page access.
+ *
+ * GENERATED CODE !!! DO NOT CHANGE !!!
+ */
+@Data
+@Generated
+public class PageParameters {
+
+	private long start;
+	private int entriesPerPage;
+
+}
