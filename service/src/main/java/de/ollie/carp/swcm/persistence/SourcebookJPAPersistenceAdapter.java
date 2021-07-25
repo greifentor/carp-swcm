@@ -8,12 +8,12 @@ import javax.inject.Named;
 
 import de.ollie.carp.swcm.core.model.Page;
 import de.ollie.carp.swcm.core.model.PageParameters;
-import de.ollie.carp.swcm.core.model.Sourcebook;
 import de.ollie.carp.swcm.persistence.converter.PageConverter;
 import de.ollie.carp.swcm.persistence.converter.PageParametersToPageableConverter;
 import de.ollie.carp.swcm.persistence.converter.SourcebookDBOConverter;
 import de.ollie.carp.swcm.persistence.entity.SourcebookDBO;
 import de.ollie.carp.swcm.persistence.repository.SourcebookDBORepository;
+import de.ollie.carp.swcm.core.model.Sourcebook;
 
 /**
  * A DBO persistence adapter for sourcebooks.
@@ -27,6 +27,7 @@ public class SourcebookJPAPersistenceAdapter {
 	private SourcebookDBOConverter converter;
 	@Inject
 	private SourcebookDBORepository repository;
+
 	@Inject
 	private PageParametersToPageableConverter pageParametersToPageableConverter;
 

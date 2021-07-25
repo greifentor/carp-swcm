@@ -2,9 +2,10 @@ package de.ollie.carp.swcm.persistence.converter;
 
 import javax.inject.Named;
 
-import de.ollie.carp.swcm.core.model.Sourcebook;
-import de.ollie.carp.swcm.persistence.entity.SourcebookDBO;
 import lombok.Generated;
+
+import de.ollie.carp.swcm.persistence.entity.SourcebookDBO;
+import de.ollie.carp.swcm.core.model.Sourcebook;
 
 /**
  * A DBO converter for sourcebooks.

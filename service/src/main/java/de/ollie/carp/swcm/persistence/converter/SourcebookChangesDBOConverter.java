@@ -1,8 +1,5 @@
 package de.ollie.carp.swcm.persistence.converter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.inject.Named;
 
 import lombok.Generated;
@@ -17,7 +14,7 @@ import de.ollie.carp.swcm.core.model.SourcebookChanges;
  */
 @Generated
 @Named
-public class SourcebookChangesDBOConverter {
+public class SourcebookChangesDBOConverter implements ToModelConverter<SourcebookChanges, SourcebookChangesDBO> {
 
 	public SourcebookChangesDBO toDBO(SourcebookChanges model) {
 		if (model == null) {
