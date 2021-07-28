@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Diagram application="Archimedes" application-version="2.21.0" diagram-version="2.0">
+<Diagram application="Archimedes" application-version="2.24.0" diagram-version="2.0">
     <AdditionalSQLStatements postChanging="" postReducing="" preChanging="" preExtending="" />
     <Colors>
         <Color b="255" g="0" name="blau" r="0" />
@@ -42,7 +42,7 @@
         <Option name="ALTERNATE_MODULE_PREFIX" parameter="" />
         <Option name="MODULE_MODE" parameter="" />
     </Options>
-    <Parameters additionalDiagramInfo="" additionalSQLScriptListener="" applicationName="SWCM" author="O. Lieshoff" basePackageName="de.ollie.carp.swcm" codeBasePath="/home/ollie/eclipse-workspace/carp-swcm" codeFactoryClassName="archimedes.codegenerators.persistence.jpa.PersistenceJPACodeFactory;archimedes.codegenerators.service.ServiceCodeFactory" comment="" dbVersionColumnDescriptionName="" dbVersionColumnVersionName="" dbVersionTableName="" deprecatedTablesHidden="false" disableTechnicalFields="false" disableTransientFields="false" domainShowMode="ALL" fontSizeDiagramHeadlines="24" fontSizeDiagramSubtitles="12" fontSizeTableContents="12" history="" markUpRequiredFieldNames="false" name="SW-CM" owner="" relationColorExternalTables="hellgrau" relationColorRegular="schwarz" schemeName="" scriptAfterWrite="" showReferencedColumns="true" uscheptiClassName="" version="1" versionComment="" versionDate="19.07.2021" />
+    <Parameters additionalDiagramInfo="" additionalSQLScriptListener="" applicationName="SWCM" author="O. Lieshoff" basePackageName="de.ollie.carp.swcm" codeBasePath="/home/ollie/eclipse-workspace/carp-swcm" codeFactoryClassName="archimedes.codegenerators.persistence.jpa.PersistenceJPACodeFactory;archimedes.codegenerators.service.ServiceCodeFactory" comment="" dbVersionColumnDescriptionName="" dbVersionColumnVersionName="" dbVersionTableName="" deprecatedTablesHidden="false" disableTechnicalFields="false" disableTransientFields="false" domainShowMode="ALL" fontSizeDiagramHeadlines="24" fontSizeDiagramSubtitles="12" fontSizeTableContents="12" history="" markUpRequiredFieldNames="false" modelCheckerScript="load(&quot;nashorn:mozilla_compat.js&quot;);$BR$importPackage(Packages.archimedes.acf.checker);$BR$importPackage(Packages.corentx.dates);$BR$importPackage(java.lang);$BR$$BR$System.out.println(&quot;Scripted Model Checker Started ...&quot;);$BR$$BR$for (i = 0, leni = tables.size(); i &amp;lt; leni; i++) {$BR$    messages.add(new ModelCheckerMessage(ModelCheckerMessage.Level.INFO, guiBundle.getResourceText(&quot;Table checked: {0}&quot;, tables.get(i).getName())));$BR$}$BR$$BR$System.out.println(&quot;Scripted Model Checker Finished.&quot;);" name="SW-CM" owner="" relationColorExternalTables="hellgrau" relationColorRegular="schwarz" schemeName="" scriptAfterWrite="" showReferencedColumns="true" uscheptiClassName="" version="1" versionComment="" versionDate="19.07.2021" />
     <Sequences />
     <Stereotypes />
     <Tables>
