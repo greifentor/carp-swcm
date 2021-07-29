@@ -4,23 +4,23 @@ import javax.inject.Named;
 
 import lombok.Generated;
 
-import de.ollie.carp.swcm.persistence.entity.SourcebookDBO;
-import de.ollie.carp.swcm.core.model.Sourcebook;
+import de.ollie.carp.swcm.persistence.entity.SourceBookDBO;
+import de.ollie.carp.swcm.core.model.SourceBook;
 
 /**
- * A DBO converter for sourcebooks.
+ * A DBO converter for source_books.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Generated
 @Named
-public class SourcebookDBOConverter implements ToModelConverter<Sourcebook, SourcebookDBO> {
+public class SourceBookDBOConverter implements ToModelConverter<SourceBook, SourceBookDBO> {
 
-	public SourcebookDBO toDBO(Sourcebook model) {
+	public SourceBookDBO toDBO(SourceBook model) {
 		if (model == null) {
 			return null;
 		}
-		return new SourcebookDBO()
+		return new SourceBookDBO()
 				.setId(model.getId())
 				.setGlobalId(model.getGlobalId())
 				.setName(model.getName())
@@ -28,11 +28,11 @@ public class SourcebookDBOConverter implements ToModelConverter<Sourcebook, Sour
 				.setToken(model.getToken());
 	}
 
-	public Sourcebook toModel(SourcebookDBO dbo) {
+	public SourceBook toModel(SourceBookDBO dbo) {
 		if (dbo == null) {
 			return null;
 		}
-		return new Sourcebook()
+		return new SourceBook()
 				.setId(dbo.getId())
 				.setGlobalId(dbo.getGlobalId())
 				.setName(dbo.getName())

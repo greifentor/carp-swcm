@@ -4,23 +4,23 @@ import javax.inject.Named;
 
 import lombok.Generated;
 
-import de.ollie.carp.swcm.persistence.entity.SourcebookChangesDBO;
-import de.ollie.carp.swcm.core.model.SourcebookChanges;
+import de.ollie.carp.swcm.persistence.entity.SourceBookChangesDBO;
+import de.ollie.carp.swcm.core.model.SourceBookChanges;
 
 /**
- * A DBO converter for sourcebook_changess.
+ * A DBO converter for source_book_changess.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Generated
 @Named
-public class SourcebookChangesDBOConverter implements ToModelConverter<SourcebookChanges, SourcebookChangesDBO> {
+public class SourceBookChangesDBOConverter implements ToModelConverter<SourceBookChanges, SourceBookChangesDBO> {
 
-	public SourcebookChangesDBO toDBO(SourcebookChanges model) {
+	public SourceBookChangesDBO toDBO(SourceBookChanges model) {
 		if (model == null) {
 			return null;
 		}
-		return new SourcebookChangesDBO()
+		return new SourceBookChangesDBO()
 				.setId(model.getId())
 				.setRecordId(model.getRecordId())
 				.setAttributeName(model.getAttributeName())
@@ -28,11 +28,11 @@ public class SourcebookChangesDBOConverter implements ToModelConverter<Sourceboo
 				.setNewValue(model.getNewValue());
 	}
 
-	public SourcebookChanges toModel(SourcebookChangesDBO dbo) {
+	public SourceBookChanges toModel(SourceBookChangesDBO dbo) {
 		if (dbo == null) {
 			return null;
 		}
-		return new SourcebookChanges()
+		return new SourceBookChanges()
 				.setId(dbo.getId())
 				.setRecordId(dbo.getRecordId())
 				.setAttributeName(dbo.getAttributeName())

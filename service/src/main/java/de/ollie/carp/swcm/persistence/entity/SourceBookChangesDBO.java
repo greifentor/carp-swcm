@@ -12,27 +12,27 @@ import lombok.Generated;
 import lombok.experimental.Accessors;
 
 /**
- * A DBO for sourcebook_changess.
+ * A DBO for source_book_changess.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Accessors(chain = true)
 @Data
 @Generated
-@Entity(name = "SourcebookChanges")
-@Table(name = "Sourcebook_Changes")
-public class SourcebookChangesDBO {
+@Entity(name = "SourceBookChanges")
+@Table(name = "SOURCE_BOOK_CHANGES")
+public class SourceBookChangesDBO {
 
 	@Id
-	@Column(name = "Id", nullable = false)
+	@Column(name = "ID", nullable = false)
 	private long id;
-	@Column(name = "RecordId", nullable = false)
+	@Column(name = "RECORD_ID", nullable = false)
 	private long recordId;
-	@Column(name = "AttributeName", nullable = false)
+	@Column(name = "ATTRIBUTE_NAME", nullable = false)
 	private String attributeName;
-	@Column(name = "ChangeDate", nullable = false)
+	@Column(name = "CHANGE_DATE", nullable = false)
 	private LocalDateTime changeDate;
-	@Column(name = "NewValue")
+	@Column(name = "NEW_VALUE")
 	private String newValue;
 
 }

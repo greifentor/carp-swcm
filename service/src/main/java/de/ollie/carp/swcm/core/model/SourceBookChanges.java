@@ -7,14 +7,14 @@ import lombok.Generated;
 import lombok.experimental.Accessors;
 
 /**
- * A model for sourcebook_changess.
+ * A model for source_book_changess.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Accessors(chain = true)
 @Data
 @Generated
-public class SourcebookChanges {
+public class SourceBookChanges {
 
 	private long id;
 	private long recordId;

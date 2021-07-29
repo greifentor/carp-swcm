@@ -5,14 +5,14 @@ import lombok.Generated;
 import lombok.experimental.Accessors;
 
 /**
- * A model for sourcebooks.
+ * A model for source_books.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Accessors(chain = true)
 @Data
 @Generated
-public class Sourcebook {
+public class SourceBook {
 
 	private long id;
 	private String globalId;

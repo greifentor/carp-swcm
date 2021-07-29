@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -13,29 +12,28 @@ import lombok.Generated;
 import lombok.experimental.Accessors;
 
 /**
- * A DBO for sourcebooks.
+ * A DBO for source_books.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Accessors(chain = true)
 @Data
 @Generated
-@Entity(name = "Sourcebook")
-@Table(name = "Sourcebook")
-public class SourcebookDBO {
+@Entity(name = "SourceBook")
+@Table(name = "SOURCE_BOOK")
+public class SourceBookDBO {
 
 	@Id
-	@SequenceGenerator(allocationSize = 1, name = "SourcebookSequence", sequenceName = "sourcebook_id_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SourcebookSequence")
-	@Column(name = "Id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID", nullable = false)
 	private long id;
-	@Column(name = "GlobalId")
+	@Column(name = "GLOBAL_ID")
 	private String globalId;
-	@Column(name = "Name", nullable = false)
+	@Column(name = "NAME", nullable = false)
 	private String name;
-	@Column(name = "OriginalName")
+	@Column(name = "ORIGINAL_NAME")
 	private String originalName;
-	@Column(name = "Token", nullable = false)
+	@Column(name = "TOKEN", nullable = false)
 	private String token;
 
 }

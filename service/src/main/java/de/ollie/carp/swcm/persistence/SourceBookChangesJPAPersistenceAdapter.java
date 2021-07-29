@@ -8,54 +8,55 @@ import javax.inject.Named;
 
 import de.ollie.carp.swcm.core.model.Page;
 import de.ollie.carp.swcm.core.model.PageParameters;
+import de.ollie.carp.swcm.core.model.SourceBookChanges;
+import de.ollie.carp.swcm.core.service.port.persistence.SourceBookChangesPersistencePort;
 import de.ollie.carp.swcm.persistence.converter.PageConverter;
 import de.ollie.carp.swcm.persistence.converter.PageParametersToPageableConverter;
-import de.ollie.carp.swcm.persistence.converter.SourcebookChangesDBOConverter;
-import de.ollie.carp.swcm.persistence.entity.SourcebookChangesDBO;
-import de.ollie.carp.swcm.persistence.repository.SourcebookChangesDBORepository;
-import de.ollie.carp.swcm.core.model.SourcebookChanges;
+import de.ollie.carp.swcm.persistence.converter.SourceBookChangesDBOConverter;
+import de.ollie.carp.swcm.persistence.entity.SourceBookChangesDBO;
+import de.ollie.carp.swcm.persistence.repository.SourceBookChangesDBORepository;
 
 /**
- * A DBO persistence adapter for sourcebook_changess.
+ * A DBO persistence adapter for source_book_changess.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Named
-public class SourcebookChangesJPAPersistenceAdapter {
+public class SourceBookChangesJPAPersistenceAdapter implements SourceBookChangesPersistencePort {
 
 	@Inject
-	private SourcebookChangesDBOConverter converter;
+	private SourceBookChangesDBOConverter converter;
 	@Inject
-	private SourcebookChangesDBORepository repository;
+	private SourceBookChangesDBORepository repository;
 
 	@Inject
 	private PageParametersToPageableConverter pageParametersToPageableConverter;
 
-	private PageConverter<SourcebookChanges, SourcebookChangesDBO> pageConverter;
+	private PageConverter<SourceBookChanges, SourceBookChangesDBO> pageConverter;
 
 	@PostConstruct
 	public void postConstruct() {
 		pageConverter = new PageConverter<>(converter);
 	}
 
-	public SourcebookChanges create(SourcebookChanges model) {
+	public SourceBookChanges create(SourceBookChanges model) {
 		model.setId(-1);
 		return converter.toModel(repository.save(converter.toDBO(model)));
 	}
 
-	public Page<SourcebookChanges> findAll(PageParameters pageParameters) {
+	public Page<SourceBookChanges> findAll(PageParameters pageParameters) {
 		return pageConverter.convert(repository.findAll(pageParametersToPageableConverter.convert(pageParameters)));
 	}
 
-	public Optional<SourcebookChanges> findById(Long id) {
+	public Optional<SourceBookChanges> findById(Long id) {
 		return repository.findById(id).map(dbo -> converter.toModel(dbo));
 	}
 
-	public SourcebookChanges update(SourcebookChanges model) {
+	public SourceBookChanges update(SourceBookChanges model) {
 		return converter.toModel(repository.save(converter.toDBO(model)));
 	}
 
-	public void delete(SourcebookChanges model) {
+	public void delete(SourceBookChanges model) {
 		repository.deleteById(model.getId());
 	}
 
