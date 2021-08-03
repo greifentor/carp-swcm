@@ -3,6 +3,7 @@ package de.ollie.carp.swcm.persistence.converter;
 import java.util.stream.Collectors;
 
 import de.ollie.carp.swcm.core.model.Page;
+
 import lombok.AllArgsConstructor;
 import lombok.Generated;
 
@@ -12,7 +13,7 @@ import lombok.Generated;
  * @param <CONTENT> The type of the page content.
  * @param <DBO>     The type of the DBO's which are representing CONTENT objects in the persistence layer.
  *
- *                  GENERATED CODE !!! DO NOT CHANGE !!!
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Generated
 @AllArgsConstructor
