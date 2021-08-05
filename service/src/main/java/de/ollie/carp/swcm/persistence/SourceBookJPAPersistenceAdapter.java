@@ -15,12 +15,14 @@ import de.ollie.carp.swcm.persistence.converter.PageParametersToPageableConverte
 import de.ollie.carp.swcm.persistence.converter.SourceBookDBOConverter;
 import de.ollie.carp.swcm.persistence.entity.SourceBookDBO;
 import de.ollie.carp.swcm.persistence.repository.SourceBookDBORepository;
+import lombok.Generated;
 
 /**
  * A DBO persistence adapter for source_books.
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
+@Generated
 @Named
 public class SourceBookJPAPersistenceAdapter implements SourceBookPersistencePort {
 

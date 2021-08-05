@@ -4,17 +4,20 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
+import lombok.Generated;
+
 /**
  * Application starter class (service only).
  *
- * @author ollie (29.07.2021)
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
+@Generated
 @SpringBootApplication
-@ComponentScan("de.ollie")
-public class Application {
+@ComponentScan("de.ollie.carp.swcm")
+public class SWCMApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(SWCMApplication.class, args);
 	}
 
 }
