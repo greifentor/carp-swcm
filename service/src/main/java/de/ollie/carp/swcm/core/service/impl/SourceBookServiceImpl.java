@@ -8,8 +8,8 @@ import javax.inject.Named;
 import de.ollie.carp.swcm.core.model.Page;
 import de.ollie.carp.swcm.core.model.PageParameters;
 import de.ollie.carp.swcm.core.model.SourceBook;
-import de.ollie.carp.swcm.core.service.SourceBookService;
 import de.ollie.carp.swcm.core.service.port.persistence.SourceBookPersistencePort;
+import de.ollie.carp.swcm.core.service.SourceBookService;
 import lombok.Generated;
 
 /**
