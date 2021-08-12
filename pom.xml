@@ -39,6 +39,7 @@
 		</pluginManagement>
 	</build>
 	<modules>
+		<module>gui-web</module>
 		<module>service</module>
 	</modules>
 	<dependencies>

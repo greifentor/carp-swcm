@@ -23,8 +23,8 @@
 		</createTable>
 		<addPrimaryKey columnNames="ID"
 			tableName="SOURCE_BOOK_CHANGES" />
-		<addAutoIncrement tableName="SOURCE_BOOK_CHANGES" startWith="1"
-			columnName="ID" columnDataType="BIGINT" />
+		<addAutoIncrement columnName="ID" startWith="1"
+			tableName="SOURCE_BOOK_CHANGES" />
 		<createTable tableName="SOURCE_BOOK">
 			<column name="ORIGINAL_NAME" type="VARCHAR(100)" />
 			<column name="ID" type="BIGINT">
@@ -39,8 +39,8 @@
 			</column>
 		</createTable>
 		<addPrimaryKey columnNames="ID" tableName="SOURCE_BOOK" />
-		<addAutoIncrement tableName="SOURCE_BOOK" startWith="1"
-			columnName="ID" columnDataType="BIGINT" />
+		<addAutoIncrement columnName="ID" startWith="1"
+			tableName="SOURCE_BOOK" />
 		<addForeignKeyConstraint
 			baseColumnNames="RECORD_ID" baseTableName="SOURCE_BOOK_CHANGES"
 			constraintName="FK_SOURCE_BOOK_CHANGES_RECORD_ID_TO_SOURCE_BOOK_ID"

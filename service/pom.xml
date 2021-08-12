@@ -109,11 +109,8 @@
 			<artifactId>hsqldb</artifactId>
 		</dependency>
 
-		<!-- dependency>
-			<groupId>de.ollie</groupId>
-			<artifactId>carp-core</artifactId>
-			<version>1.0.0</version>
-		</dependency -->
+		<!-- dependency> <groupId>de.ollie</groupId> <artifactId>carp-core</artifactId> 
+			<version>1.0.0</version> </dependency -->
 
 		<!-- dependencies for jasper reports -->
 		<dependency>
@@ -135,6 +132,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
 			<version>4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>de.ollie</groupId>
+			<artifactId>carp-core</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 	</dependencies>
