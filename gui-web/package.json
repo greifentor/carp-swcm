@@ -60,7 +60,7 @@
       "webpack-merge": "4.2.2",
       "webpack-dev-server": "3.9.0"
     },
-    "hash": "b5d326e5e992995537eeb5e5e1e0dd6bc94975eb3377be52dad5029e16025ace"
+    "hash": "91e9bea64b9a551c11eb45479e68be7d2c9bc3bc57c47b3e1be5e28cc6c8c6db"
   },
   "dependencies": {
     "@vaadin/router": "^1.6.0",
@@ -88,7 +88,6 @@
     "@vaadin/vaadin-login": "1.0.1",
     "@vaadin/vaadin-button": "2.2.2",
     "@vaadin/vaadin-date-picker": "4.0.7",
-    "@polymer/paper-toggle-button": "^3.0.1",
     "@vaadin/vaadin-text-field": "2.5.4",
     "@vaadin/vaadin-menu-bar": "1.0.5",
     "@vaadin/vaadin-custom-field": "1.0.11",

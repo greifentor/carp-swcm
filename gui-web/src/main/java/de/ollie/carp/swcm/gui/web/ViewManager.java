@@ -9,7 +9,7 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PreserveOnRefresh;
 import com.vaadin.flow.router.Route;
-import com.vaadin.spring.annotation.VaadinSessionScope;
+import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 
 import de.ollie.carp.corelib.aop.annotations.LogExecutionTime;
 import de.ollie.carp.corelib.event.Event;
@@ -100,6 +100,11 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 	@LogExecutionTime
 	private void processEvent(Event event) {
 		logger.info("processing event: {}", event);
+		if (event.getType().getName().equals("LOGGED_IN")) {
+			Disposable.removeAll(this);
+			add(new MainMenuView(eventManager, this));
+			logger.info("login: {}", event);
+		}
 	}
 
 	@LogExecutionTime

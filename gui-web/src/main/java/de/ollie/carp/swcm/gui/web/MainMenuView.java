@@ -7,8 +7,8 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.server.VaadinService;
-import com.vaadin.server.VaadinSession;
+import com.vaadin.flow.server.VaadinService;
+import com.vaadin.flow.server.VaadinSession;
 
 import de.ollie.carp.corelib.event.Event;
 import de.ollie.carp.corelib.event.EventManager;
