@@ -57,6 +57,8 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 		logger.info("AppConfiguration         {}", check(appConfiguration));
 		logger.info("EventManager             {}", check(eventManager));
 		eventManager.addListener(this);
+		setMargin(false);
+		setWidthFull();
 		add(
 				new UserLoginView(
 						appConfiguration,
@@ -101,8 +103,7 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 	private void processEvent(Event event) {
 		logger.info("processing event: {}", event);
 		if (event.getType().getName().equals("LOGGED_IN")) {
-			Disposable.removeAll(this);
-			add(new MainMenuView(eventManager, this));
+			setMainMenuView();
 			logger.info("login: {}", event);
 		}
 	}
@@ -123,6 +124,11 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 	@Override
 	public void setUserAuthorization(UserAuthorizationSO userAuthorization) {
 		this.userAuthorization = userAuthorization;
+	}
+
+	public void setMainMenuView() {
+		Disposable.removeAll(this);
+		add(new MainMenuView(eventManager, this, serviceAccess, this));
 	}
 
 }

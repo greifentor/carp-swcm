@@ -5,6 +5,7 @@ import javax.inject.Named;
 
 import de.ollie.carp.corelib.localization.ResourceManager;
 import de.ollie.carp.corelib.service.user.UserAuthorizationService;
+import de.ollie.carp.swcm.gui.web.service.SourceBookGOService;
 import lombok.Getter;
 
 /**
@@ -21,4 +22,6 @@ public class ServiceAccess {
 	@Inject
 	private UserAuthorizationService userAuthorizationService;
 
+	@Inject
+	private SourceBookGOService sourceBookService;
 }
