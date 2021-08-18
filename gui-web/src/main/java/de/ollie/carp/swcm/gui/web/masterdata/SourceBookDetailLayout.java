@@ -27,6 +27,7 @@ public class SourceBookDetailLayout extends VerticalLayout {
 	private static final Logger logger = LogManager.getLogger(SourceBookDetailLayout.class);
 
 	private Button buttonBack;
+	private Button buttonRemove;
 	private Button buttonSave;
 	private TextField textFieldGlobalId;
 	private TextField textFieldName;
@@ -48,6 +49,8 @@ public class SourceBookDetailLayout extends VerticalLayout {
 		this.service = service;
 		buttonBack = ButtonFactory.createButton("sourcebooks.button.back.text");
 		buttonBack.addClickListener(event -> parent.back());
+		buttonRemove = ButtonFactory.createButton("sourcebooks.button.remove.text");
+		buttonRemove.addClickListener(event -> remove());
 		buttonSave = ButtonFactory.createButton("sourcebooks.button.save.text");
 		buttonSave.addClickListener(event -> save());
 		textFieldGlobalId = TextFieldFactory
@@ -73,6 +76,9 @@ public class SourceBookDetailLayout extends VerticalLayout {
 		textFieldToken.setValue(go.getToken());
 		textFieldToken.setWidthFull();
 		add(buttonBack, textFieldGlobalId, textFieldName, textFieldOriginalName, textFieldToken, buttonSave);
+		if (go.getId() > 0) {
+			add(buttonRemove);
+		}
 	}
 
 	@Override
@@ -93,6 +99,11 @@ public class SourceBookDetailLayout extends VerticalLayout {
 		go.setOriginalName(textFieldOriginalName.getValue());
 		go.setToken(textFieldToken.getValue());
 		service.update(go);
+		parent.back();
+	}
+
+	private void remove() {
+		service.delete(go);
 		parent.back();
 	}
 

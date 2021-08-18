@@ -7,6 +7,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.selection.SelectionEvent;
 
 import de.ollie.carp.corelib.gui.Disposable;
 import de.ollie.carp.corelib.gui.vaadin.component.Button;
@@ -57,10 +58,21 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 								.getResourceManager()
 								.getLocalizedString("sourcebooks.grid.header.token", LocalizationSO.DE));
 		grid.setWidthFull();
+		grid.addSelectionListener(this::enabledButtons);
 		add(buttonBack, grid, buttonAdd, buttonEdit);
 		updateGrid(0);
 		setMargin(false);
 		setWidthFull();
+	}
+
+	private void enabledButtons(SelectionEvent<Grid<SourceBookGO>, SourceBookGO> event) {
+		if (event.getFirstSelectedItem().isEmpty()) {
+			buttonAdd.setEnabled(true);
+			buttonEdit.setEnabled(false);
+		} else {
+			buttonAdd.setEnabled(false);
+			buttonEdit.setEnabled(true);
+		}
 	}
 
 	@Override
