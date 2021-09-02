@@ -1,4 +1,4 @@
-package de.ollie.carp.swcm.gui.web.go;
+package de.ollie.carp.swcm.gui.vaadin.go.converter;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

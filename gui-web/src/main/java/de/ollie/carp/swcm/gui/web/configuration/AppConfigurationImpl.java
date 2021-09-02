@@ -1,8 +1,9 @@
 package de.ollie.carp.swcm.gui.web.configuration;
 
-import de.ollie.carp.corelib.service.AppConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+
+import de.ollie.carp.corelib.service.AppConfiguration;
 
 /**
  * A configuration for the application.

@@ -1,4 +1,4 @@
-package de.ollie.carp.swcm.gui.web.go.converter;
+package de.ollie.carp.swcm.gui.vaadin.converter;
 
 import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import de.ollie.carp.swcm.core.model.PageParameters;
-import de.ollie.carp.swcm.gui.web.go.PageParametersGO;
+import de.ollie.carp.swcm.gui.vaadin.converter.PageParametersGOConverter;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 
 @ExtendWith(MockitoExtension.class)
 public class PageParametersGOConverterTest {

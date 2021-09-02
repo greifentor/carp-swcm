@@ -1,9 +1,9 @@
-package de.ollie.carp.swcm.gui.web.go.converter;
+package de.ollie.carp.swcm.gui.vaadin.converter;
 
 import javax.inject.Named;
 
 import de.ollie.carp.swcm.core.model.PageParameters;
-import de.ollie.carp.swcm.gui.web.go.PageParametersGO;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 
 /**
  * A converter for the page parameters GO.

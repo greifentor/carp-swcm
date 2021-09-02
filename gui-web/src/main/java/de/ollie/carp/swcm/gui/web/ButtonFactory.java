@@ -13,7 +13,7 @@ public class ButtonFactory {
 		Button button = new Button(text)
 				.setBackgroundColor("white")
 				.setBorder("solid 2px")
-				.setBorderColor("green")
+				.setBorderColor("yellow")
 				.setColor("black")
 				.setBackgroundImage("gate.png");
 		return button;

@@ -1,9 +1,9 @@
-package de.ollie.carp.swcm.gui.web.go.converter;
+package de.ollie.carp.swcm.gui.vaadin.converter;
 
 import javax.inject.Named;
 
 import de.ollie.carp.swcm.core.model.SourceBook;
-import de.ollie.carp.swcm.gui.web.go.SourceBookGO;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 
 /**
  * A converter for source book GO's.

@@ -1,4 +1,4 @@
-package de.ollie.carp.swcm.gui.web.go.converter;
+package de.ollie.carp.swcm.gui.vaadin.converter;
 
 /**
  * An interface for to GO converters.

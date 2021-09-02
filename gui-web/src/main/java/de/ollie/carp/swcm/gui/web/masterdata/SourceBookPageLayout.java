@@ -13,10 +13,10 @@ import de.ollie.carp.corelib.gui.Disposable;
 import de.ollie.carp.corelib.gui.vaadin.component.Button;
 import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.localization.LocalizationSO;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 import de.ollie.carp.swcm.gui.web.ButtonFactory;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
-import de.ollie.carp.swcm.gui.web.go.PageParametersGO;
-import de.ollie.carp.swcm.gui.web.go.SourceBookGO;
 
 /**
  * A view for paginated source book lists.
@@ -38,11 +38,14 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 		super();
 		this.parent = parent;
 		this.serviceAccess = serviceAccess;
-		buttonBack = ButtonFactory.createButton("sourcebooks.button.back.text");
+		buttonBack = ButtonFactory
+				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.back.text"));
 		buttonBack.addClickListener(event -> parent.back());
-		buttonAdd = ButtonFactory.createButton("sourcebooks.button.add.text");
+		buttonAdd = ButtonFactory
+				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.add.text"));
 		buttonAdd.addClickListener(event -> addRecord());
-		buttonEdit = ButtonFactory.createButton("sourcebooks.button.edit.text");
+		buttonEdit = ButtonFactory
+				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.edit.text"));
 		buttonEdit.addClickListener(event -> editRecord());
 		grid = new Grid<>();
 		grid
@@ -63,15 +66,27 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 		updateGrid(0);
 		setMargin(false);
 		setWidthFull();
+		setButtonEnabled(buttonEdit, false);
 	}
 
 	private void enabledButtons(SelectionEvent<Grid<SourceBookGO>, SourceBookGO> event) {
 		if (event.getFirstSelectedItem().isEmpty()) {
-			buttonAdd.setEnabled(true);
-			buttonEdit.setEnabled(false);
+			setButtonEnabled(buttonAdd, true);
+			setButtonEnabled(buttonEdit, false);
 		} else {
-			buttonAdd.setEnabled(false);
-			buttonEdit.setEnabled(true);
+			setButtonEnabled(buttonAdd, false);
+			setButtonEnabled(buttonEdit, true);
+		}
+	}
+
+	private void setButtonEnabled(Button button, boolean enabled) {
+		button.setEnabled(enabled);
+		if (enabled) {
+			button.setBackgroundImage("gate.png");
+			button.setBorderColor("yellow");
+		} else {
+			button.setBackgroundImage("gate-disabled.png");
+			button.setBorderColor("gray");
 		}
 	}
 

@@ -12,9 +12,9 @@ import de.ollie.carp.corelib.gui.vaadin.component.Button;
 import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.localization.LocalizationSO;
 import de.ollie.carp.corelib.localization.ResourceManager;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 import de.ollie.carp.swcm.gui.web.ButtonFactory;
 import de.ollie.carp.swcm.gui.web.TextFieldFactory;
-import de.ollie.carp.swcm.gui.web.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.web.service.SourceBookGOService;
 
 /**
@@ -47,11 +47,11 @@ public class SourceBookDetailLayout extends VerticalLayout {
 		this.go = go;
 		this.parent = parent;
 		this.service = service;
-		buttonBack = ButtonFactory.createButton("sourcebooks.button.back.text");
+		buttonBack = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.back.text"));
 		buttonBack.addClickListener(event -> parent.back());
-		buttonRemove = ButtonFactory.createButton("sourcebooks.button.remove.text");
+		buttonRemove = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.remove.text"));
 		buttonRemove.addClickListener(event -> remove());
-		buttonSave = ButtonFactory.createButton("sourcebooks.button.save.text");
+		buttonSave = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.save.text"));
 		buttonSave.addClickListener(event -> save());
 		textFieldGlobalId = TextFieldFactory
 				.createTextField(
@@ -79,6 +79,8 @@ public class SourceBookDetailLayout extends VerticalLayout {
 		if (go.getId() > 0) {
 			add(buttonRemove);
 		}
+		setMargin(false);
+		setWidthFull();
 	}
 
 	@Override

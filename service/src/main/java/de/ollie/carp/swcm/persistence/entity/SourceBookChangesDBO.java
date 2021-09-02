@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,7 +24,6 @@ import lombok.experimental.Accessors;
 public class SourceBookChangesDBO {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID", nullable = false)
 	private long id;
 	@Column(name = "RECORD_ID", nullable = false)

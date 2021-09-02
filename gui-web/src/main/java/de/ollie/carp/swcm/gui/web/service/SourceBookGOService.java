@@ -8,12 +8,12 @@ import javax.inject.Named;
 
 import de.ollie.carp.swcm.core.model.SourceBook;
 import de.ollie.carp.swcm.core.service.SourceBookService;
-import de.ollie.carp.swcm.gui.web.go.PageGO;
-import de.ollie.carp.swcm.gui.web.go.PageParametersGO;
-import de.ollie.carp.swcm.gui.web.go.SourceBookGO;
-import de.ollie.carp.swcm.gui.web.go.converter.PageGOConverter;
-import de.ollie.carp.swcm.gui.web.go.converter.PageParametersGOConverter;
-import de.ollie.carp.swcm.gui.web.go.converter.SourceBookGOConverter;
+import de.ollie.carp.swcm.gui.vaadin.converter.PageGOConverter;
+import de.ollie.carp.swcm.gui.vaadin.converter.PageParametersGOConverter;
+import de.ollie.carp.swcm.gui.vaadin.converter.SourceBookGOConverter;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.PageGO;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
+import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 
 /**
  * 
