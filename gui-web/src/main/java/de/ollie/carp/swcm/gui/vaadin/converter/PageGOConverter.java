@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 import de.ollie.carp.swcm.core.model.Page;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageGO;
+
 import lombok.AllArgsConstructor;
 import lombok.Generated;
 
@@ -13,7 +14,7 @@ import lombok.Generated;
  * @param <GO>    The type of the GO's which are representing model objects in the GUI web layer.
  * @param <MODEL> The type of the service layer model class.
  *
- *                GENERATED CODE !!! DO NOT CHANGE !!!
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Generated
 @AllArgsConstructor
