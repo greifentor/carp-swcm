@@ -8,7 +8,7 @@ import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 /**
  * A converter for the page parameters GO.
  *
- * @author ollie (16.08.2021)
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
 @Named
 public class PageParametersGOConverter {
