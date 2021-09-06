@@ -13,8 +13,8 @@ import de.ollie.carp.corelib.gui.Disposable;
 import de.ollie.carp.corelib.gui.vaadin.component.Button;
 import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.localization.LocalizationSO;
+import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
-import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 import de.ollie.carp.swcm.gui.web.ButtonFactory;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
 

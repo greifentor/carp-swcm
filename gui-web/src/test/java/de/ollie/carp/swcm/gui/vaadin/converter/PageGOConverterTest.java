@@ -14,8 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import de.ollie.carp.swcm.core.model.Page;
 import de.ollie.carp.swcm.core.model.SourceBook;
 import de.ollie.carp.swcm.gui.vaadin.converter.SourceBookGOConverter;
+import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageGO;
-import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 
 @ExtendWith(MockitoExtension.class)
 public class PageGOConverterTest {

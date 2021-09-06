@@ -2,14 +2,17 @@ package de.ollie.carp.swcm.gui.vaadin.converter;
 
 import javax.inject.Named;
 
+import lombok.Generated;
+
+import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.core.model.SourceBook;
-import de.ollie.carp.swcm.gui.vaadin.go.converter.SourceBookGO;
 
 /**
- * A converter for source book GO's.
+ * A GO converter for source_books.
  *
- * @author ollie (16.08.2021)
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
+@Generated
 @Named
 public class SourceBookGOConverter implements ToGOConverter<SourceBookGO, SourceBook> {
 
