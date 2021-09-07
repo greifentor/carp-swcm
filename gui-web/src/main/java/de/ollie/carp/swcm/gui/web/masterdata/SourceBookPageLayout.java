@@ -30,6 +30,7 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 	private Button buttonAdd;
 	private Button buttonBack;
 	private Button buttonEdit;
+	private Button buttonRemove;
 	private Grid<SourceBookGO> grid;
 	private ServiceAccess serviceAccess;
 	private ParentLayout parent;
@@ -47,6 +48,9 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 		buttonEdit = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.edit.text"));
 		buttonEdit.addClickListener(event -> editRecord());
+		buttonRemove = ButtonFactory
+				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.remove.text"));
+		buttonRemove.addClickListener(event -> removeRecord());
 		grid = new Grid<>();
 		grid
 				.addColumn(SourceBookGO::getName)
@@ -62,20 +66,23 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 								.getLocalizedString("sourcebooks.grid.header.token", LocalizationSO.DE));
 		grid.setWidthFull();
 		grid.addSelectionListener(this::enabledButtons);
-		add(buttonBack, grid, buttonAdd, buttonEdit);
+		add(buttonBack, grid, buttonAdd, buttonEdit, buttonRemove);
 		updateGrid(0);
 		setMargin(false);
 		setWidthFull();
 		setButtonEnabled(buttonEdit, false);
+		setButtonEnabled(buttonRemove, false);
 	}
 
 	private void enabledButtons(SelectionEvent<Grid<SourceBookGO>, SourceBookGO> event) {
 		if (event.getFirstSelectedItem().isEmpty()) {
 			setButtonEnabled(buttonAdd, true);
 			setButtonEnabled(buttonEdit, false);
+			setButtonEnabled(buttonRemove, false);
 		} else {
 			setButtonEnabled(buttonAdd, false);
 			setButtonEnabled(buttonEdit, true);
+			setButtonEnabled(buttonRemove, true);
 		}
 	}
 
@@ -118,7 +125,7 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 						this,
 						serviceAccess.getResourceManager(),
 						serviceAccess.getSourceBookService(),
-						new SourceBookGO().setGlobalId("").setName("").setOriginalName("").setToken("")));
+						new SourceBookGO().setId(-1).setGlobalId("").setName("").setOriginalName("").setToken("")));
 	}
 
 	private void editRecord() {
@@ -130,6 +137,13 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 							serviceAccess.getResourceManager(),
 							serviceAccess.getSourceBookService(),
 							go));
+		});
+	}
+
+	private void removeRecord() {
+		grid.getSelectedItems().stream().findFirst().ifPresent(go -> {
+			serviceAccess.getSourceBookService().delete(go);
+			updateGrid(0);
 		});
 	}
 
