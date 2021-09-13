@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -16,6 +17,7 @@ import de.ollie.carp.corelib.localization.LocalizationSO;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 import de.ollie.carp.swcm.gui.web.ButtonFactory;
+import de.ollie.carp.swcm.gui.web.MasterDataButtonLayout;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
 
 /**
@@ -66,10 +68,13 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 								.getLocalizedString("sourcebooks.grid.header.token", LocalizationSO.DE));
 		grid.setWidthFull();
 		grid.addSelectionListener(this::enabledButtons);
-		add(buttonBack, grid, buttonAdd, buttonEdit, buttonRemove);
-		updateGrid(0);
+		MasterDataButtonLayout buttonLayout = new MasterDataButtonLayout(buttonAdd, buttonEdit, buttonRemove);
+		buttonLayout.setMargin(false);
+		buttonLayout.setWidthFull();
 		setMargin(false);
 		setWidthFull();
+		add(buttonBack, grid, buttonLayout);
+		updateGrid(0);
 		setButtonEnabled(buttonEdit, false);
 		setButtonEnabled(buttonRemove, false);
 	}
@@ -119,24 +124,25 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 	}
 
 	private void addRecord() {
-		Disposable.removeAll(this);
-		add(
-				new SourceBookDetailLayout(
-						this,
-						serviceAccess.getResourceManager(),
-						serviceAccess.getSourceBookService(),
-						new SourceBookGO().setId(-1).setGlobalId("").setName("").setOriginalName("").setToken("")));
+		SourceBookDetailLayout layout = new SourceBookDetailLayout(
+				this,
+				serviceAccess.getResourceManager(),
+				serviceAccess.getSourceBookService(),
+				new SourceBookGO().setId(-1).setGlobalId("").setName("").setOriginalName("").setToken(""));
+		layout.setMargin(false);
+		layout.setWidthFull();
+		parent.updateViewWith(layout);
 	}
 
 	private void editRecord() {
 		grid.getSelectedItems().stream().findFirst().ifPresent(go -> {
-			Disposable.removeAll(this);
-			add(
-					new SourceBookDetailLayout(
-							this,
-							serviceAccess.getResourceManager(),
-							serviceAccess.getSourceBookService(),
-							go));
+			parent
+					.updateViewWith(
+							new SourceBookDetailLayout(
+									this,
+									serviceAccess.getResourceManager(),
+									serviceAccess.getSourceBookService(),
+									go));
 		});
 	}
 
@@ -149,8 +155,12 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 
 	@Override
 	public void back() {
-		Disposable.removeAll(this);
-		add(new SourceBookPageLayout(serviceAccess, parent));
+		parent.updateViewWith(this);
+	}
+
+	@Override
+	public void updateViewWith(Component component) {
+		parent.updateViewWith(component);
 	}
 
 }

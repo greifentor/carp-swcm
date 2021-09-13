@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.server.VaadinService;
@@ -75,11 +76,20 @@ public class MainMenuView extends VerticalLayout implements ParentLayout {
 
 	private void switchToSourceBooks() {
 		Disposable.removeAll(this);
-		add(new SourceBookPageLayout(serviceAccess, this));
+		SourceBookPageLayout layout = new SourceBookPageLayout(serviceAccess, this);
+		layout.setMargin(false);
+		layout.setWidthFull();
+		add(layout);
 	}
 
 	public void back() {
 		parent.setMainMenuView();
+	}
+
+	@Override
+	public void updateViewWith(Component component) {
+		Disposable.removeAll(this);
+		add(component);
 	}
 
 }
