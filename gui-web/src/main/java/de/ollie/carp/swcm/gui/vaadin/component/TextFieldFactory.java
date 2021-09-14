@@ -1,4 +1,4 @@
-package de.ollie.carp.swcm.gui.web;
+package de.ollie.carp.swcm.gui.vaadin.component;
 
 import de.ollie.carp.corelib.gui.vaadin.component.TextField;
 

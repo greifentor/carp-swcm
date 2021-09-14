@@ -14,10 +14,11 @@ import de.ollie.carp.corelib.event.Event;
 import de.ollie.carp.corelib.event.EventManager;
 import de.ollie.carp.corelib.event.EventType;
 import de.ollie.carp.corelib.gui.Disposable;
-import de.ollie.carp.corelib.gui.vaadin.component.Button;
-import de.ollie.carp.corelib.gui.vaadin.component.ButtonGrid;
-import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.service.user.SessionOwner;
+import de.ollie.carp.swcm.gui.vaadin.component.Button;
+import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
+import de.ollie.carp.swcm.gui.vaadin.component.ButtonGrid;
+import de.ollie.carp.swcm.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.swcm.gui.web.masterdata.SourceBookPageLayout;
 
 /**

@@ -10,14 +10,13 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.selection.SelectionEvent;
 
-import de.ollie.carp.corelib.gui.Disposable;
-import de.ollie.carp.corelib.gui.vaadin.component.Button;
-import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.localization.LocalizationSO;
+import de.ollie.carp.swcm.gui.vaadin.component.Button;
+import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
+import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
+import de.ollie.carp.swcm.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
-import de.ollie.carp.swcm.gui.web.ButtonFactory;
-import de.ollie.carp.swcm.gui.web.MasterDataButtonLayout;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
 
 /**

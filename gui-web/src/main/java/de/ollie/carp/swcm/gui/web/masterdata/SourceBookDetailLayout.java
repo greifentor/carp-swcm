@@ -2,13 +2,13 @@ package de.ollie.carp.swcm.gui.web.masterdata;
 
 import com.vaadin.flow.component.textfield.TextField;
 
-import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.localization.LocalizationSO;
 import de.ollie.carp.corelib.localization.ResourceManager;
+import de.ollie.carp.swcm.gui.vaadin.component.AbstractMasterDataDetailLayout;
+import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
+import de.ollie.carp.swcm.gui.vaadin.component.ParentLayout;
+import de.ollie.carp.swcm.gui.vaadin.component.TextFieldFactory;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
-import de.ollie.carp.swcm.gui.web.AbstractMasterDataDetailLayout;
-import de.ollie.carp.swcm.gui.web.MasterDataButtonLayout;
-import de.ollie.carp.swcm.gui.web.TextFieldFactory;
 import de.ollie.carp.swcm.gui.web.service.SourceBookGOService;
 
 /**

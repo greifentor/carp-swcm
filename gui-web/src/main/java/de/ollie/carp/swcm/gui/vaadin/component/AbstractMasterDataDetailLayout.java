@@ -1,16 +1,16 @@
-package de.ollie.carp.swcm.gui.web;
+package de.ollie.carp.swcm.gui.vaadin.component;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
-import de.ollie.carp.corelib.gui.vaadin.component.Button;
-import de.ollie.carp.corelib.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.corelib.localization.ResourceManager;
+import lombok.Generated;
 
 /**
  * A base layout for master data detail views.
  *
- * @author ollie (08.09.2021)
+ * GENERATED CODE !!! DO NOT CHANGE !!!
  */
+@Generated
 public abstract class AbstractMasterDataDetailLayout extends VerticalLayout {
 
 	protected Button buttonBack;

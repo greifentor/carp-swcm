@@ -1,8 +1,6 @@
-package de.ollie.carp.swcm.gui.web;
+package de.ollie.carp.swcm.gui.vaadin.component;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-
-import de.ollie.carp.corelib.gui.vaadin.component.Button;
 
 /**
  * A layout for master data buttons.

@@ -1,6 +1,4 @@
-package de.ollie.carp.swcm.gui.web;
-
-import de.ollie.carp.corelib.gui.vaadin.component.Button;
+package de.ollie.carp.swcm.gui.vaadin.component;
 
 /**
  * A factory for buttons.
