@@ -49,7 +49,10 @@ public class MainMenuView extends VerticalLayout implements ParentLayout {
 		Button buttonSourceBooks = ButtonFactory.createButton("Source Books");
 		buttonSourceBooks.addClickListener(event -> switchToSourceBooks());
 		buttonSourceBooks.setWidthFull();
-		ButtonGrid buttonGrid = new ButtonGrid(5, buttonSourceBooks);
+		Button buttonTest = ButtonFactory.createButton("Test");
+		buttonTest.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate("carp-swcm/test")));
+		buttonTest.setWidthFull();
+		ButtonGrid buttonGrid = new ButtonGrid(5, buttonSourceBooks, buttonTest);
 		buttonGrid.setMargin(false);
 		buttonGrid.setWidthFull();
 		setMargin(false);

@@ -10,7 +10,6 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.selection.SelectionEvent;
 
-import de.ollie.carp.corelib.localization.LocalizationSO;
 import de.ollie.carp.swcm.gui.vaadin.component.Button;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
@@ -18,6 +17,7 @@ import de.ollie.carp.swcm.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
+import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
 
 /**
  * A view for paginated source book lists.
@@ -58,13 +58,13 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 				.setHeader(
 						serviceAccess
 								.getResourceManager()
-								.getLocalizedString("sourcebooks.grid.header.name", LocalizationSO.DE));
+								.getLocalizedString("sourcebooks.grid.header.name", LocalizationGO.DE));
 		grid
 				.addColumn(SourceBookGO::getToken)
 				.setHeader(
 						serviceAccess
 								.getResourceManager()
-								.getLocalizedString("sourcebooks.grid.header.token", LocalizationSO.DE));
+								.getLocalizedString("sourcebooks.grid.header.token", LocalizationGO.DE));
 		grid.setWidthFull();
 		grid.addSelectionListener(this::enabledButtons);
 		MasterDataButtonLayout buttonLayout = new MasterDataButtonLayout(buttonAdd, buttonEdit, buttonRemove);
@@ -111,6 +111,7 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 	protected void onDetach(DetachEvent detachEvent) {
 		logger.info("onDetach");
 		super.onDetach(detachEvent);
+		getElement().removeFromTree();
 	}
 
 	private void updateGrid(int pageNumber) {

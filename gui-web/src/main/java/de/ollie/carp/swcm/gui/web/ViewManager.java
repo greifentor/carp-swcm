@@ -17,6 +17,7 @@ import de.ollie.carp.corelib.event.EventListener;
 import de.ollie.carp.corelib.event.EventManager;
 import de.ollie.carp.corelib.gui.Disposable;
 import de.ollie.carp.corelib.gui.user.UserLoginView;
+import de.ollie.carp.corelib.localization.ResourceManager;
 import de.ollie.carp.corelib.service.AppConfiguration;
 import de.ollie.carp.corelib.service.SessionIdSO;
 import de.ollie.carp.corelib.service.user.SessionOwner;
@@ -40,15 +41,21 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 
 	private final transient AppConfiguration appConfiguration;
 	private final transient EventManager eventManager;
+	private final transient ResourceManager resourceManager;
 	private final transient ServiceAccess serviceAccess;
 
 	private UserAuthorizationSO userAuthorization;
 	private SessionIdSO sessionId;
 
-	public ViewManager(AppConfiguration appConfiguration, EventManager eventManager, ServiceAccess serviceAccess) {
+	public ViewManager(
+			AppConfiguration appConfiguration,
+			EventManager eventManager,
+			ServiceAccess serviceAccess,
+			ResourceManager resourceManager) {
 		super();
 		this.appConfiguration = appConfiguration;
 		this.eventManager = eventManager;
+		this.resourceManager = resourceManager;
 		this.serviceAccess = serviceAccess;
 		this.sessionId = new SessionIdSO(appConfiguration.getName() + "Session-" + ++counter);
 		getStyle().set("background-image", "url(StarWars-Background.png)");
@@ -63,7 +70,7 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 				new UserLoginView(
 						appConfiguration,
 						eventManager,
-						serviceAccess.getResourceManager(),
+						resourceManager,
 						this,
 						serviceAccess.getUserAuthorizationService(),
 						sessionId));

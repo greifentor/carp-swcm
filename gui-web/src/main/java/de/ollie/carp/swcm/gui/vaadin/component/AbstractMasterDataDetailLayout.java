@@ -2,7 +2,7 @@ package de.ollie.carp.swcm.gui.vaadin.component;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
-import de.ollie.carp.corelib.localization.ResourceManager;
+import de.ollie.carp.swcm.gui.web.port.ResourceManager;
 import lombok.Generated;
 
 /**
@@ -25,7 +25,7 @@ public abstract class AbstractMasterDataDetailLayout extends VerticalLayout {
 		this.resourceManager = resourceManager;
 		buttonBack =
 				ButtonFactory.createButton(resourceManager.getLocalizedString(resourcePrefix + ".button.back.text"));
-		buttonBack.addClickListener(event -> parent.back());
+		buttonBack.addClickListener(event -> back());
 		buttonRemove =
 				ButtonFactory.createButton(resourceManager.getLocalizedString(resourcePrefix + ".button.remove.text"));
 		buttonRemove.addClickListener(event -> remove());
@@ -42,6 +42,10 @@ public abstract class AbstractMasterDataDetailLayout extends VerticalLayout {
 			buttons[1] = buttonRemove;
 		}
 		return buttons;
+	}
+
+	protected void back() {
+		parent.back();
 	}
 
 	protected abstract void remove();
