@@ -1,48 +1,62 @@
 package de.ollie.carp.swcm.gui.web.masterdata;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.vaadin.flow.component.AttachEvent;
-import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.data.selection.SelectionEvent;
+import com.vaadin.flow.router.BeforeEnterEvent;
+import com.vaadin.flow.router.BeforeEnterObserver;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
+import com.vaadin.flow.router.OptionalParameter;
+import com.vaadin.flow.router.QueryParameters;
+import com.vaadin.flow.router.Route;
 
 import de.ollie.carp.swcm.gui.vaadin.component.Button;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
-import de.ollie.carp.swcm.gui.vaadin.component.ParentLayout;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
 import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
+import lombok.RequiredArgsConstructor;
 
 /**
  * A view for paginated source book lists.
  *
  * @author ollie (16.08.2021)
  */
-public class SourceBookPageLayout extends VerticalLayout implements ParentLayout {
+@Route("carp-swcm/sourcebooks")
+@RequiredArgsConstructor
+public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<String> {
 
 	private static final Logger logger = LogManager.getLogger(SourceBookPageLayout.class);
+
+	private final ServiceAccess serviceAccess;
 
 	private Button buttonAdd;
 	private Button buttonBack;
 	private Button buttonEdit;
 	private Button buttonRemove;
 	private Grid<SourceBookGO> grid;
-	private ServiceAccess serviceAccess;
-	private ParentLayout parent;
 
-	public SourceBookPageLayout(ServiceAccess serviceAccess, ParentLayout parent) {
-		super();
-		this.parent = parent;
-		this.serviceAccess = serviceAccess;
+	@Override
+	public void setParameter(BeforeEvent event, @OptionalParameter String parameter) {
+		logger.debug("setParameter");
+	}
+
+	@Override
+	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		buttonBack = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.back.text"));
-		buttonBack.addClickListener(event -> parent.back());
+		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate("carp-swcm/menu")));
 		buttonAdd = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.add.text"));
 		buttonAdd.addClickListener(event -> addRecord());
@@ -70,7 +84,7 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 		MasterDataButtonLayout buttonLayout = new MasterDataButtonLayout(buttonAdd, buttonEdit, buttonRemove);
 		buttonLayout.setMargin(false);
 		buttonLayout.setWidthFull();
-		setMargin(false);
+		setMargin(true);
 		setWidthFull();
 		add(buttonBack, grid, buttonLayout);
 		updateGrid(0);
@@ -124,25 +138,13 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 	}
 
 	private void addRecord() {
-		SourceBookDetailLayout layout = new SourceBookDetailLayout(
-				this,
-				serviceAccess.getResourceManager(),
-				serviceAccess.getSourceBookService(),
-				new SourceBookGO().setId(-1).setGlobalId("").setName("").setOriginalName("").setToken(""));
-		layout.setMargin(false);
-		layout.setWidthFull();
-		parent.updateViewWith(layout);
+		getUI().ifPresent(ui -> ui.navigate("carp-swcm/sourcebooks/details"));
 	}
 
 	private void editRecord() {
 		grid.getSelectedItems().stream().findFirst().ifPresent(go -> {
-			parent
-					.updateViewWith(
-							new SourceBookDetailLayout(
-									this,
-									serviceAccess.getResourceManager(),
-									serviceAccess.getSourceBookService(),
-									go));
+			QueryParameters parameters = new QueryParameters(Map.of("id", List.of("" + go.getId())));
+			getUI().ifPresent(ui -> ui.navigate("carp-swcm/sourcebooks/details", parameters));
 		});
 	}
 
@@ -151,16 +153,6 @@ public class SourceBookPageLayout extends VerticalLayout implements ParentLayout
 			serviceAccess.getSourceBookService().delete(go);
 			updateGrid(0);
 		});
-	}
-
-	@Override
-	public void back() {
-		parent.updateViewWith(this);
-	}
-
-	@Override
-	public void updateViewWith(Component component) {
-		parent.updateViewWith(component);
 	}
 
 }

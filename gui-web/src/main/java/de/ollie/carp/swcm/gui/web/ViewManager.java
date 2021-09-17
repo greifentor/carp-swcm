@@ -39,10 +39,10 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 
 	private static int counter = 0;
 
-	private final transient AppConfiguration appConfiguration;
-	private final transient EventManager eventManager;
-	private final transient ResourceManager resourceManager;
-	private final transient ServiceAccess serviceAccess;
+	private final AppConfiguration appConfiguration;
+	private final EventManager eventManager;
+	private final ResourceManager resourceManager;
+	private final ServiceAccess serviceAccess;
 
 	private UserAuthorizationSO userAuthorization;
 	private SessionIdSO sessionId;
@@ -63,6 +63,7 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 		logger.info("Started view manager ... " + sessionId);
 		logger.info("AppConfiguration         {}", check(appConfiguration));
 		logger.info("EventManager             {}", check(eventManager));
+		System.out.println(eventManager);
 		eventManager.addListener(this);
 		setMargin(false);
 		setWidthFull();
@@ -134,8 +135,7 @@ public class ViewManager extends VerticalLayout implements Disposable, EventList
 	}
 
 	public void setMainMenuView() {
-		Disposable.removeAll(this);
-		add(new MainMenuView(eventManager, this, serviceAccess, this));
+		getUI().ifPresent(ui -> ui.navigate("carp-swcm/menu"));
 	}
 
 }

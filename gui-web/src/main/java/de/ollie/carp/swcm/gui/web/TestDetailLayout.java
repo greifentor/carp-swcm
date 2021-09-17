@@ -3,8 +3,6 @@ package de.ollie.carp.swcm.gui.web;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,17 +22,18 @@ import com.vaadin.flow.router.Route;
 import de.ollie.carp.swcm.gui.vaadin.component.Button;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.web.service.SourceBookGOService;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author ollie (16.09.2021)
  */
 @Route("carp-swcm/test/details")
+@RequiredArgsConstructor
 public class TestDetailLayout extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<String> {
 
 	private static final Logger logger = LogManager.getLogger(TestDetailLayout.class);
 
-	@Inject
-	private SourceBookGOService sourceBookService;
+	private final SourceBookGOService sourceBookService;
 
 	private long id;
 
