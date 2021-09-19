@@ -24,7 +24,10 @@ import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
+import de.ollie.carp.swcm.gui.web.MainMenuView;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
+import de.ollie.carp.swcm.gui.web.SessionData;
+import de.ollie.carp.swcm.gui.web.UserAuthorizationChecker;
 import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
 import lombok.RequiredArgsConstructor;
 
@@ -33,13 +36,16 @@ import lombok.RequiredArgsConstructor;
  *
  * @author ollie (16.08.2021)
  */
-@Route("carp-swcm/sourcebooks")
+@Route(SourceBookPageLayout.URL)
 @RequiredArgsConstructor
 public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<String> {
+
+	public static final String URL = "carp-swcm/sourcebooks";
 
 	private static final Logger logger = LogManager.getLogger(SourceBookPageLayout.class);
 
 	private final ServiceAccess serviceAccess;
+	private final SessionData sessionData;
 
 	private Button buttonAdd;
 	private Button buttonBack;
@@ -54,9 +60,10 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 
 	@Override
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
+		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
 		buttonBack = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.back.text"));
-		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate("carp-swcm/menu")));
+		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(MainMenuView.URL)));
 		buttonAdd = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.add.text"));
 		buttonAdd.addClickListener(event -> addRecord());
@@ -84,9 +91,13 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 		MasterDataButtonLayout buttonLayout = new MasterDataButtonLayout(buttonAdd, buttonEdit, buttonRemove);
 		buttonLayout.setMargin(false);
 		buttonLayout.setWidthFull();
-		setMargin(true);
+		setMargin(false);
 		setWidthFull();
-		add(buttonBack, grid, buttonLayout);
+		VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(false);
+		layout.setWidthFull();
+		layout.add(buttonBack, grid, buttonLayout);
+		add(layout);
 		updateGrid(0);
 		setButtonEnabled(buttonEdit, false);
 		setButtonEnabled(buttonRemove, false);
@@ -117,7 +128,7 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 
 	@Override
 	protected void onAttach(AttachEvent attachEvent) {
-		logger.info("onAttach");
+		logger.info("source book page layout opened for user '{}'.", sessionData.getUserName());
 		super.onAttach(attachEvent);
 	}
 
