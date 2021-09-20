@@ -1,4 +1,4 @@
-package de.ollie.carp.swcm.gui.web;
+package de.ollie.carp.swcm.gui.web.masterdata;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,20 +14,23 @@ import com.vaadin.flow.router.Route;
 import de.ollie.carp.swcm.gui.vaadin.component.Button;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonGrid;
+import de.ollie.carp.swcm.gui.web.HeaderLayout;
 import de.ollie.carp.swcm.gui.web.HeaderLayout.HeaderLayoutMode;
-import de.ollie.carp.swcm.gui.web.masterdata.MasterDataLayout;
+import de.ollie.carp.swcm.gui.web.MainMenuView;
+import de.ollie.carp.swcm.gui.web.SessionData;
+import de.ollie.carp.swcm.gui.web.UserAuthorizationChecker;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The main menu view for the Star Wars application.
+ * A layout with buttons to select a master data page
  *
- * @author ollie (11.08.2021)
+ * @author ollie (20.09.2021)
  */
-@Route(MainMenuView.URL)
+@Route(MasterDataLayout.URL)
 @RequiredArgsConstructor
-public class MainMenuView extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<String> {
+public class MasterDataLayout extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<String> {
 
-	public static final String URL = "carp-swcm/menu";
+	public static final String URL = "carp-swcm/masterdata/menu";
 
 	private static final Logger logger = LogManager.getLogger(MainMenuView.class);
 
@@ -42,26 +45,22 @@ public class MainMenuView extends VerticalLayout implements BeforeEnterObserver,
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
 		logger.info("created");
-		Button buttonMasterData = ButtonFactory.createButton("Stammdaten");
-		buttonMasterData.addClickListener(event -> switchToMasterData());
+		Button buttonMasterData = ButtonFactory.createButton("Sourcebooks");
+		buttonMasterData.addClickListener(event -> switchToSourceBooks());
 		buttonMasterData.setWidthFull();
-		Button buttonLogout = ButtonFactory.createButton("Logout");
-		buttonLogout.addClickListener(event -> getUI().ifPresent(ui -> {
-			logger.info("user '{}' logged out.", sessionData.getUserAuthorization().getName());
-			sessionData.setUserAuthorization(null);
-			ui.navigate(ApplicationStartLayout.URL);
-		}));
+		Button buttonBack = ButtonFactory.createButton("Back");
+		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(MainMenuView.URL)));
 		ButtonGrid buttonGrid = new ButtonGrid(5, buttonMasterData);
 		buttonGrid.setMargin(false);
 		buttonGrid.setWidthFull();
 		setWidthFull();
 		setMargin(false);
-		add(new HeaderLayout(buttonLogout, "Main Menu", HeaderLayoutMode.WRAPPED), buttonGrid);
+		add(new HeaderLayout(buttonBack, "Master Data", HeaderLayoutMode.WRAPPED), buttonGrid);
 		logger.info("main menu view opened for user '{}'.", sessionData.getUserName());
 	}
 
-	private void switchToMasterData() {
-		getUI().ifPresent(ui -> ui.navigate(MasterDataLayout.URL));
+	private void switchToSourceBooks() {
+		getUI().ifPresent(ui -> ui.navigate(SourceBookPageLayout.URL));
 	}
 
 }

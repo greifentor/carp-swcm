@@ -24,7 +24,8 @@ import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
-import de.ollie.carp.swcm.gui.web.MainMenuView;
+import de.ollie.carp.swcm.gui.web.HeaderLayout;
+import de.ollie.carp.swcm.gui.web.HeaderLayout.HeaderLayoutMode;
 import de.ollie.carp.swcm.gui.web.ServiceAccess;
 import de.ollie.carp.swcm.gui.web.SessionData;
 import de.ollie.carp.swcm.gui.web.UserAuthorizationChecker;
@@ -40,7 +41,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterObserver, HasUrlParameter<String> {
 
-	public static final String URL = "carp-swcm/sourcebooks";
+	public static final String URL = "carp-swcm/masterdata/sourcebooks";
 
 	private static final Logger logger = LogManager.getLogger(SourceBookPageLayout.class);
 
@@ -63,7 +64,7 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
 		buttonBack = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.back.text"));
-		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(MainMenuView.URL)));
+		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(MasterDataLayout.URL)));
 		buttonAdd = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.add.text"));
 		buttonAdd.addClickListener(event -> addRecord());
@@ -96,7 +97,7 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(false);
 		layout.setWidthFull();
-		layout.add(buttonBack, grid, buttonLayout);
+		layout.add(new HeaderLayout(buttonBack, "Sourcebooks", HeaderLayoutMode.PLAIN), grid, buttonLayout);
 		add(layout);
 		updateGrid(0);
 		setButtonEnabled(buttonEdit, false);
@@ -149,13 +150,13 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 	}
 
 	private void addRecord() {
-		getUI().ifPresent(ui -> ui.navigate("carp-swcm/sourcebooks/details"));
+		getUI().ifPresent(ui -> ui.navigate(SourceBookDetailLayout.URL));
 	}
 
 	private void editRecord() {
 		grid.getSelectedItems().stream().findFirst().ifPresent(go -> {
 			QueryParameters parameters = new QueryParameters(Map.of("id", List.of("" + go.getId())));
-			getUI().ifPresent(ui -> ui.navigate("carp-swcm/sourcebooks/details", parameters));
+			getUI().ifPresent(ui -> ui.navigate(SourceBookDetailLayout.URL, parameters));
 		});
 	}
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 
@@ -27,15 +28,20 @@ public class ButtonGrid extends VerticalLayout {
 		row.setWidthFull();
 		while (buttonsPerRow > 0 && !buttonList.isEmpty()) {
 			Button button = buttonList.get(0);
-			row.add(button);
+			if (button == null) {
+				Label label = new Label("");
+				label.setWidthFull();
+				row.add(label);
+			} else {
+				row.add(button);
+			}
 			buttonList.remove(button);
 			buttonsPerRow--;
 		}
 		while (buttonsPerRow > 0) {
-			Button button = new Button("").setBackgroundColor("transparent").setBorder("none");
-			button.setWidthFull();
-			button.setEnabled(false);
-			row.add(button);
+			Label label = new Label("");
+			label.setWidthFull();
+			row.add(label);
 			buttonsPerRow--;
 		}
 		return row;
