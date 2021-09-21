@@ -30,6 +30,7 @@ import de.ollie.carp.swcm.gui.web.ServiceAccess;
 import de.ollie.carp.swcm.gui.web.SessionData;
 import de.ollie.carp.swcm.gui.web.UserAuthorizationChecker;
 import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
+import de.ollie.carp.swcm.gui.web.port.ResourceManager;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -45,6 +46,7 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 
 	private static final Logger logger = LogManager.getLogger(SourceBookPageLayout.class);
 
+	private final ResourceManager resourceManager;
 	private final ServiceAccess serviceAccess;
 	private final SessionData sessionData;
 
@@ -62,9 +64,6 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 	@Override
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
-		buttonBack = ButtonFactory
-				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.back.text"));
-		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(MasterDataLayout.URL)));
 		buttonAdd = ButtonFactory
 				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.add.text"));
 		buttonAdd.addClickListener(event -> addRecord());
@@ -97,7 +96,15 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(false);
 		layout.setWidthFull();
-		layout.add(new HeaderLayout(buttonBack, "Sourcebooks", HeaderLayoutMode.PLAIN), grid, buttonLayout);
+		layout
+				.add(
+						new HeaderLayout(
+								ButtonFactory.createBackButton(resourceManager, this::getUI, MasterDataLayout.URL),
+								ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
+								"Sourcebooks",
+								HeaderLayoutMode.PLAIN),
+						grid,
+						buttonLayout);
 		add(layout);
 		updateGrid(0);
 		setButtonEnabled(buttonEdit, false);

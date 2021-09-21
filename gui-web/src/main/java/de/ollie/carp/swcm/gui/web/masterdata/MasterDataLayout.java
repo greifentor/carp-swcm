@@ -19,6 +19,8 @@ import de.ollie.carp.swcm.gui.web.HeaderLayout.HeaderLayoutMode;
 import de.ollie.carp.swcm.gui.web.MainMenuView;
 import de.ollie.carp.swcm.gui.web.SessionData;
 import de.ollie.carp.swcm.gui.web.UserAuthorizationChecker;
+import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
+import de.ollie.carp.swcm.gui.web.port.ResourceManager;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -34,6 +36,7 @@ public class MasterDataLayout extends VerticalLayout implements BeforeEnterObser
 
 	private static final Logger logger = LogManager.getLogger(MainMenuView.class);
 
+	private final ResourceManager resourceManager;
 	private final SessionData sessionData;
 
 	@Override
@@ -45,17 +48,23 @@ public class MasterDataLayout extends VerticalLayout implements BeforeEnterObser
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
 		logger.info("created");
-		Button buttonMasterData = ButtonFactory.createButton("Sourcebooks");
+		Button buttonMasterData = ButtonFactory
+				.createButton(
+						resourceManager.getLocalizedString("master-data.button.source-books.text", LocalizationGO.DE));
 		buttonMasterData.addClickListener(event -> switchToSourceBooks());
 		buttonMasterData.setWidthFull();
-		Button buttonBack = ButtonFactory.createButton("Back");
-		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(MainMenuView.URL)));
 		ButtonGrid buttonGrid = new ButtonGrid(5, buttonMasterData);
 		buttonGrid.setMargin(false);
 		buttonGrid.setWidthFull();
 		setWidthFull();
 		setMargin(false);
-		add(new HeaderLayout(buttonBack, "Master Data", HeaderLayoutMode.WRAPPED), buttonGrid);
+		add(
+				new HeaderLayout(
+						ButtonFactory.createBackButton(resourceManager, this::getUI, MainMenuView.URL),
+						ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
+						resourceManager.getLocalizedString("master-data.header.sourcebooks.label", LocalizationGO.DE),
+						HeaderLayoutMode.WRAPPED),
+				buttonGrid);
 		logger.info("main menu view opened for user '{}'.", sessionData.getUserName());
 	}
 

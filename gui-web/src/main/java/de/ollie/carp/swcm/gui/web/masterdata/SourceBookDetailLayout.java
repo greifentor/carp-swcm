@@ -26,6 +26,7 @@ import de.ollie.carp.swcm.gui.vaadin.component.TextFieldFactory;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.web.HeaderLayout;
 import de.ollie.carp.swcm.gui.web.HeaderLayout.HeaderLayoutMode;
+import de.ollie.carp.swcm.gui.web.SessionData;
 import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
 import de.ollie.carp.swcm.gui.web.port.ResourceManager;
 import de.ollie.carp.swcm.gui.web.service.SourceBookGOService;
@@ -46,6 +47,7 @@ public class SourceBookDetailLayout extends VerticalLayout implements BeforeEnte
 
 	private final ResourceManager resourceManager;
 	private final SourceBookGOService service;
+	private final SessionData sessionData;
 
 	private Button buttonBack;
 	private Button buttonRemove;
@@ -76,8 +78,6 @@ public class SourceBookDetailLayout extends VerticalLayout implements BeforeEnte
 
 	@Override
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
-		buttonBack = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.back.text"));
-		buttonBack.addClickListener(event -> getUI().ifPresent(ui -> ui.navigate(SourceBookPageLayout.URL)));
 		buttonRemove = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.remove.text"));
 		buttonRemove.addClickListener(event -> remove());
 		buttonSave = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.save.text"));
@@ -104,16 +104,25 @@ public class SourceBookDetailLayout extends VerticalLayout implements BeforeEnte
 						resourceManager.getLocalizedString("sourcebooks.details.field.token.label", LocalizationGO.DE));
 		textFieldToken.setValue(go.getToken());
 		textFieldToken.setWidthFull();
-		setMargin(true);
+		setMargin(false);
 		setWidthFull();
+		VerticalLayout layout = new VerticalLayout();
+		layout.setMargin(false);
+		layout.setWidthFull();
 		MasterDataButtonLayout buttonLayout = new MasterDataButtonLayout(getButtons(go.getId()));
-		add(
-				new HeaderLayout(buttonBack, "Sourcebook - " + go.getName(), HeaderLayoutMode.PLAIN),
-				textFieldGlobalId,
-				textFieldName,
-				textFieldOriginalName,
-				textFieldToken,
-				buttonLayout);
+		layout
+				.add(
+						new HeaderLayout(
+								ButtonFactory.createBackButton(resourceManager, this::getUI, SourceBookPageLayout.URL),
+								ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
+								"Sourcebook - " + go.getName(),
+								HeaderLayoutMode.PLAIN),
+						textFieldGlobalId,
+						textFieldName,
+						textFieldOriginalName,
+						textFieldToken,
+						buttonLayout);
+		add(layout);
 	}
 
 	private Button[] getButtons(long id) {

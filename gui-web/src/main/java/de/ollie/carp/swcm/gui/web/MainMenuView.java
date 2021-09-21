@@ -15,7 +15,9 @@ import de.ollie.carp.swcm.gui.vaadin.component.Button;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonGrid;
 import de.ollie.carp.swcm.gui.web.HeaderLayout.HeaderLayoutMode;
+import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
 import de.ollie.carp.swcm.gui.web.masterdata.MasterDataLayout;
+import de.ollie.carp.swcm.gui.web.port.ResourceManager;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -31,6 +33,7 @@ public class MainMenuView extends VerticalLayout implements BeforeEnterObserver,
 
 	private static final Logger logger = LogManager.getLogger(MainMenuView.class);
 
+	private final ResourceManager resourceManager;
 	private final SessionData sessionData;
 
 	@Override
@@ -42,21 +45,22 @@ public class MainMenuView extends VerticalLayout implements BeforeEnterObserver,
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
 		logger.info("created");
-		Button buttonMasterData = ButtonFactory.createButton("Stammdaten");
+		Button buttonMasterData = ButtonFactory
+				.createButton(
+						resourceManager.getLocalizedString("main-menu.button.master-data.text", LocalizationGO.DE));
 		buttonMasterData.addClickListener(event -> switchToMasterData());
 		buttonMasterData.setWidthFull();
-		Button buttonLogout = ButtonFactory.createButton("Logout");
-		buttonLogout.addClickListener(event -> getUI().ifPresent(ui -> {
-			logger.info("user '{}' logged out.", sessionData.getUserAuthorization().getName());
-			sessionData.setUserAuthorization(null);
-			ui.navigate(ApplicationStartLayout.URL);
-		}));
 		ButtonGrid buttonGrid = new ButtonGrid(5, buttonMasterData);
 		buttonGrid.setMargin(false);
 		buttonGrid.setWidthFull();
 		setWidthFull();
 		setMargin(false);
-		add(new HeaderLayout(buttonLogout, "Main Menu", HeaderLayoutMode.WRAPPED), buttonGrid);
+		add(
+				new HeaderLayout(
+						ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
+						resourceManager.getLocalizedString("commons.header.main-menu.label", LocalizationGO.DE),
+						HeaderLayoutMode.WRAPPED),
+				buttonGrid);
 		logger.info("main menu view opened for user '{}'.", sessionData.getUserName());
 	}
 
