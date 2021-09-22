@@ -8,6 +8,7 @@ import com.vaadin.flow.spring.annotation.VaadinSessionScope;
 
 import de.ollie.carp.corelib.service.SessionIdSO;
 import de.ollie.carp.corelib.service.user.UserAuthorizationSO;
+import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
 import lombok.Data;
 
 /**
@@ -24,6 +25,7 @@ public class SessionData {
 
 	private UserAuthorizationSO userAuthorization;
 	private SessionIdSO id;
+	private LocalizationGO localization = LocalizationGO.DE;
 
 	@PostConstruct
 	void postConstruct() {

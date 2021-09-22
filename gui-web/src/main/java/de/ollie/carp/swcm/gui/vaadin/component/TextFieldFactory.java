@@ -1,7 +1,5 @@
 package de.ollie.carp.swcm.gui.vaadin.component;
 
-import de.ollie.carp.corelib.gui.vaadin.component.TextField;
-
 /**
  * A factory for a text field.
  *
