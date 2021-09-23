@@ -60,7 +60,7 @@ public class MasterDataLayout extends VerticalLayout implements BeforeEnterObser
 		setMargin(false);
 		add(
 				new HeaderLayout(
-						ButtonFactory.createBackButton(resourceManager, this::getUI, MainMenuView.URL),
+						ButtonFactory.createBackButton(resourceManager, this::getUI, MainMenuView.URL, sessionData),
 						ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
 						resourceManager.getLocalizedString("master-data.header.sourcebooks.label", LocalizationGO.DE),
 						HeaderLayoutMode.WRAPPED),

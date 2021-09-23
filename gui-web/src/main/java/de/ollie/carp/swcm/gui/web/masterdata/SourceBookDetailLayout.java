@@ -12,9 +12,7 @@ import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.Route;
 
 import de.ollie.carp.swcm.gui.vaadin.component.AbstractMasterDataBaseLayout;
-import de.ollie.carp.swcm.gui.vaadin.component.Button;
 import de.ollie.carp.swcm.gui.vaadin.component.ButtonFactory;
-import de.ollie.carp.swcm.gui.vaadin.component.MasterDataButtonLayout;
 import de.ollie.carp.swcm.gui.vaadin.go.SourceBookGO;
 import de.ollie.carp.swcm.gui.web.HeaderLayout;
 import de.ollie.carp.swcm.gui.web.HeaderLayout.HeaderLayoutMode;
@@ -39,9 +37,6 @@ public class SourceBookDetailLayout extends AbstractMasterDataBaseLayout {
 	private final ResourceManager resourceManager;
 	private final SourceBookGOService service;
 	private final SessionData sessionData;
-
-	private Button buttonRemove;
-	private Button buttonSave;
 
 	private TextField textFieldGlobalId;
 	private TextField textFieldName;
@@ -77,10 +72,6 @@ public class SourceBookDetailLayout extends AbstractMasterDataBaseLayout {
 
 	@Override
 	public void doBeforeEnter(BeforeEnterEvent beforeEnterEvent) {
-		buttonRemove = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.remove.text"));
-		buttonRemove.addClickListener(event -> remove());
-		buttonSave = ButtonFactory.createButton(resourceManager.getLocalizedString("sourcebooks.button.save.text"));
-		buttonSave.addClickListener(event -> save());
 		textFieldGlobalId = createTextField("globalId", go.getGlobalId());
 		textFieldName = createTextField("name", go.getName());
 		textFieldOriginalName = createTextField("originalName", go.getOriginalName());
@@ -90,11 +81,15 @@ public class SourceBookDetailLayout extends AbstractMasterDataBaseLayout {
 		VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(false);
 		layout.setWidthFull();
-		MasterDataButtonLayout buttonLayout = new MasterDataButtonLayout(getButtons(go.getId()));
 		layout
 				.add(
 						new HeaderLayout(
-								ButtonFactory.createBackButton(resourceManager, this::getUI, SourceBookPageLayout.URL),
+								ButtonFactory
+										.createBackButton(
+												resourceManager,
+												this::getUI,
+												SourceBookPageLayout.URL,
+												sessionData),
 								ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
 								"Sourcebook - " + go.getName(),
 								HeaderLayoutMode.PLAIN),
@@ -102,18 +97,8 @@ public class SourceBookDetailLayout extends AbstractMasterDataBaseLayout {
 						textFieldName,
 						textFieldOriginalName,
 						textFieldToken,
-						buttonLayout);
+						getMasterDataButtonLayout(go.getId() > 0));
 		add(layout);
-	}
-
-	private Button[] getButtons(long id) {
-		boolean couldBeRemoved = id > 0;
-		Button[] buttons = new Button[1 + (couldBeRemoved ? 1 : 0)];
-		buttons[0] = buttonSave;
-		if (couldBeRemoved) {
-			buttons[1] = buttonRemove;
-		}
-		return buttons;
 	}
 
 	@Override
@@ -129,7 +114,8 @@ public class SourceBookDetailLayout extends AbstractMasterDataBaseLayout {
 		getElement().removeFromTree();
 	}
 
-	private void save() {
+	@Override
+	protected void save() {
 		go.setGlobalId(textFieldGlobalId.getValue());
 		go.setName(textFieldName.getValue());
 		go.setOriginalName(textFieldOriginalName.getValue());
@@ -138,7 +124,8 @@ public class SourceBookDetailLayout extends AbstractMasterDataBaseLayout {
 		getUI().ifPresent(ui -> ui.navigate(SourceBookPageLayout.URL));
 	}
 
-	private void remove() {
+	@Override
+	protected void remove() {
 		service.delete(go);
 		getUI().ifPresent(ui -> ui.navigate(SourceBookPageLayout.URL));
 	}

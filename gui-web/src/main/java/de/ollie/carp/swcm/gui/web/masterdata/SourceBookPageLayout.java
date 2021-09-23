@@ -64,15 +64,9 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 	@Override
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(sessionData, beforeEnterEvent);
-		buttonAdd = ButtonFactory
-				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.add.text"));
-		buttonAdd.addClickListener(event -> addRecord());
-		buttonEdit = ButtonFactory
-				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.edit.text"));
-		buttonEdit.addClickListener(event -> editRecord());
-		buttonRemove = ButtonFactory
-				.createButton(serviceAccess.getResourceManager().getLocalizedString("sourcebooks.button.remove.text"));
-		buttonRemove.addClickListener(event -> removeRecord());
+		buttonAdd = ButtonFactory.createAddButton(resourceManager, event -> addRecord(), sessionData);
+		buttonEdit = ButtonFactory.createEditButton(resourceManager, event -> editRecord(), sessionData);
+		buttonRemove = ButtonFactory.createRemoveButton(resourceManager, event -> removeRecord(), sessionData);
 		grid = new Grid<>();
 		grid
 				.addColumn(SourceBookGO::getName)
@@ -99,7 +93,12 @@ public class SourceBookPageLayout extends VerticalLayout implements BeforeEnterO
 		layout
 				.add(
 						new HeaderLayout(
-								ButtonFactory.createBackButton(resourceManager, this::getUI, MasterDataLayout.URL),
+								ButtonFactory
+										.createBackButton(
+												resourceManager,
+												this::getUI,
+												MasterDataLayout.URL,
+												sessionData),
 								ButtonFactory.createLogoutButton(resourceManager, this::getUI, sessionData, logger),
 								"Sourcebooks",
 								HeaderLayoutMode.PLAIN),

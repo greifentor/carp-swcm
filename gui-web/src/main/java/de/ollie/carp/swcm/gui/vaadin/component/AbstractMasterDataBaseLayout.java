@@ -30,6 +30,9 @@ public abstract class AbstractMasterDataBaseLayout extends VerticalLayout
 
 	private static final Logger logger = LogManager.getLogger(AbstractMasterDataBaseLayout.class);
 
+	protected Button buttonRemove;
+	protected Button buttonSave;
+
 	protected Map<String, List<String>> parametersMap;
 
 	protected abstract ResourceManager getResourceManager();
@@ -54,8 +57,14 @@ public abstract class AbstractMasterDataBaseLayout extends VerticalLayout
 	public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
 		logger.info("check for authorization");
 		UserAuthorizationChecker.forwardToLoginOnNoUserSetForSession(getSessionData(), beforeEnterEvent);
+		buttonRemove = ButtonFactory.createRemoveButton(getResourceManager(), event -> remove(), getSessionData());
+		buttonSave = ButtonFactory.createSaveButton(getResourceManager(), event -> save(), getSessionData());
 		doBeforeEnter(beforeEnterEvent);
 	}
+
+	protected abstract void remove();
+
+	protected abstract void save();
 
 	protected void doBeforeEnter(BeforeEnterEvent beforeEnterEvent) {
 	}
@@ -72,4 +81,16 @@ public abstract class AbstractMasterDataBaseLayout extends VerticalLayout
 		return textField;
 	}
 
+	protected Button[] getButtons(boolean couldBeRemoved) {
+		Button[] buttons = new Button[1 + (couldBeRemoved ? 1 : 0)];
+		buttons[0] = buttonSave;
+		if (couldBeRemoved) {
+			buttons[1] = buttonRemove;
+		}
+		return buttons;
+	}
+
+	protected MasterDataButtonLayout getMasterDataButtonLayout(boolean couldBeRemoved) {
+		return new MasterDataButtonLayout(getButtons(couldBeRemoved));
+	}
 }

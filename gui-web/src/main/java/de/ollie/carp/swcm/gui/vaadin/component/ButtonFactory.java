@@ -1,15 +1,16 @@
 package de.ollie.carp.swcm.gui.vaadin.component;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.apache.logging.log4j.Logger;
 
+import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.UI;
 
 import de.ollie.carp.swcm.gui.web.ApplicationStartLayout;
 import de.ollie.carp.swcm.gui.web.SessionData;
-import de.ollie.carp.swcm.gui.web.go.LocalizationGO;
 import de.ollie.carp.swcm.gui.web.port.ResourceManager;
 
 /**
@@ -29,24 +30,55 @@ public class ButtonFactory {
 		return button;
 	}
 
+	public static Button createAddButton(ResourceManager resourceManager, Consumer<ClickEvent<?>> action,
+			SessionData sessionData) {
+		return createResourcedButton(resourceManager, "commons.button.add.text", action, sessionData);
+	}
+
 	public static Button createBackButton(ResourceManager resourceManager, Supplier<Optional<UI>> uiSupplier,
-			String urlBack) {
+			String urlBack, SessionData sessionData) {
 		Button buttonBack = ButtonFactory
-				.createButton(resourceManager.getLocalizedString("commons.button.back.text", LocalizationGO.DE));
+				.createButton(
+						resourceManager.getLocalizedString("commons.button.back.text", sessionData.getLocalization()));
 		buttonBack.addClickListener(event -> uiSupplier.get().ifPresent(ui -> ui.navigate(urlBack)));
 		return buttonBack;
+	}
+
+	public static Button createEditButton(ResourceManager resourceManager, Consumer<ClickEvent<?>> action,
+			SessionData sessionData) {
+		return createResourcedButton(resourceManager, "commons.button.edit.text", action, sessionData);
 	}
 
 	public static Button createLogoutButton(ResourceManager resourceManager, Supplier<Optional<UI>> uiSupplier,
 			SessionData sessionData, Logger logger) {
 		Button buttonLogout = ButtonFactory
-				.createButton(resourceManager.getLocalizedString("commons.button.logout.text", LocalizationGO.DE));
+				.createButton(
+						resourceManager
+								.getLocalizedString("commons.button.logout.text", sessionData.getLocalization()));
 		buttonLogout.addClickListener(event -> uiSupplier.get().ifPresent(ui -> {
 			logger.info("user '{}' logged out.", sessionData.getUserAuthorization().getName());
 			sessionData.setUserAuthorization(null);
 			ui.navigate(ApplicationStartLayout.URL);
 		}));
 		return buttonLogout;
+	}
+
+	public static Button createRemoveButton(ResourceManager resourceManager, Consumer<ClickEvent<?>> action,
+			SessionData sessionData) {
+		return createResourcedButton(resourceManager, "commons.button.remove.text", action, sessionData);
+	}
+
+	private static Button createResourcedButton(ResourceManager resourceManager, String resourceId,
+			Consumer<ClickEvent<?>> action, SessionData sessionData) {
+		Button button = ButtonFactory
+				.createButton(resourceManager.getLocalizedString(resourceId, sessionData.getLocalization()));
+		button.addClickListener(action::accept);
+		return button;
+	}
+
+	public static Button createSaveButton(ResourceManager resourceManager, Consumer<ClickEvent<?>> action,
+			SessionData sessionData) {
+		return createResourcedButton(resourceManager, "commons.button.save.text", action, sessionData);
 	}
 
 }
