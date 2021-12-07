@@ -1,5 +1,7 @@
 package de.ollie.carp.swcm.gui.vaadin.converter;
 
+import lombok.Generated;
+
 /**
  * An interface for to GO converters.
  *
@@ -8,6 +10,7 @@ package de.ollie.carp.swcm.gui.vaadin.converter;
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
+@Generated
 public interface ToGOConverter<GO, MODEL> {
 
 	GO toGO(MODEL model);

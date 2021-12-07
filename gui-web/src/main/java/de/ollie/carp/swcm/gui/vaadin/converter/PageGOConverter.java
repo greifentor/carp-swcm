@@ -16,8 +16,8 @@ import lombok.Generated;
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
-@Generated
 @AllArgsConstructor
+@Generated
 public class PageGOConverter<GO, MODEL> {
 
 	private final ToGOConverter<GO, MODEL> toGOConverter;

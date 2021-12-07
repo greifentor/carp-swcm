@@ -2,6 +2,8 @@ package de.ollie.carp.swcm.gui.vaadin.converter;
 
 import javax.inject.Named;
 
+import lombok.Generated;
+
 import de.ollie.carp.swcm.core.model.PageParameters;
 import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
 
@@ -10,6 +12,7 @@ import de.ollie.carp.swcm.gui.vaadin.go.converter.PageParametersGO;
  *
  * GENERATED CODE !!! DO NOT CHANGE !!!
  */
+@Generated
 @Named
 public class PageParametersGOConverter {
 
